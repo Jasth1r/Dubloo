@@ -1,0 +1,822 @@
+:root {
+  --primary-color: #1e88e5;
+  --primary-dark: #0d1b2a;
+  --primary-light: #42a5f5;
+  --accent-green: #00e676;
+  --accent-green-dark: #00c853;
+  --text-color: #e0e6ed;
+  --text-light: #8892a4;
+  --bg-primary: #0a0e17;
+  --bg-card: #141b2d;
+  --bg-elevated: #1c2538;
+  --border-color: rgba(30, 136, 229, 0.25);
+  --bubble-radius: 20px;
+  --success-color: #00e676;
+  --error-color: #ff5252;
+  --warning-color: #ffab40;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Space Grotesk', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-primary);
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24'%3E%3Cpath d='M2 1 L18 12 L2 23 Z' fill='%23006633' stroke='%2300331a' stroke-width='1'/%3E%3C/svg%3E") 2 12, auto;
+}
+
+a {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-green);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ======================================
+   Onboarding Page
+   ====================================== */
+.onboarding-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #0a1628 0%, #050a12 70%, #000000 100%);
+  cursor: pointer;
+}
+
+.particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.particle-canvas canvas {
+  display: block;
+}
+
+.onboarding-hint {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 1rem;
+  color: rgba(224, 230, 237, 0.45);
+  letter-spacing: 1px;
+  animation: hintBlink 1.5s ease-in-out infinite, hintFadeIn 2s ease 1s both;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes hintBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes hintFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  background: var(--bg-primary);
+  clip-path: circle(0% at 50% 50%);
+  animation: circleExpand 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes circleExpand {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(150% at 50% 50%);
+  }
+}
+
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hidden-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hidden-mobile {
+    display: block;
+  }
+}
+
+
+
+/* ======================================
+   Logo / Brand
+   ====================================== */
+.logo-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  perspective: 900px;
+}
+
+.logo-badge {
+  position: relative;
+  width: 2.65rem;
+  height: 2.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.logo-badge-shadow {
+  position: absolute;
+  inset: auto 10% -18%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.34) 0%, rgba(30, 136, 229, 0.16) 42%, rgba(26, 232, 173, 0) 72%);
+  filter: blur(10px);
+  transform: translateZ(-1px);
+}
+
+.logo-badge-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.92rem;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.18) 18%, transparent 38%),
+    linear-gradient(145deg, var(--accent-green) 0%, var(--primary-light) 36%, var(--primary-color) 68%, var(--primary-dark) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -14px 24px rgba(9, 18, 40, 0.42),
+    0 10px 24px rgba(0, 0, 0, 0.34),
+    0 0 22px rgba(30, 136, 229, 0.24);
+  transform:
+    perspective(180px)
+    rotateX(18deg)
+    rotateY(-18deg)
+    translateZ(0);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+}
+
+.logo-badge-face::before {
+  content: '';
+  position: absolute;
+  inset: 8% 10% 46% 12%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.08));
+  transform: rotate(-18deg);
+  filter: blur(0.5px);
+}
+
+.logo-badge-face::after {
+  content: '';
+  position: absolute;
+  inset: auto -12% -18% 16%;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(7, 15, 34, 0), rgba(7, 15, 34, 0.48));
+  transform: rotate(-10deg);
+}
+
+.logo-badge-core {
+  position: absolute;
+  inset: 24%;
+  border-radius: 0.72rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.02) 30%),
+    linear-gradient(145deg, rgba(10, 19, 39, 0.1), rgba(5, 14, 28, 0.58));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.26);
+}
+
+.logo-badge-core::before,
+.logo-badge-core::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(180deg, rgba(217, 255, 241, 0.98), rgba(66, 165, 245, 0.72));
+  box-shadow: 0 0 10px rgba(30, 136, 229, 0.28);
+}
+
+.logo-badge-core::before {
+  width: 23%;
+  height: 52%;
+  left: 24%;
+  top: 22%;
+  border-radius: 999px;
+}
+
+.logo-badge-core::after {
+  width: 34%;
+  height: 23%;
+  right: 18%;
+  top: 38%;
+  border-radius: 999px;
+}
+
+.logo-badge-spec {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  filter: blur(0.3px);
+}
+
+.logo-badge-spec-a {
+  width: 18%;
+  height: 18%;
+  top: 14%;
+  right: 16%;
+  opacity: 0.9;
+}
+
+.logo-badge-spec-b {
+  width: 10%;
+  height: 10%;
+  top: 30%;
+  right: 28%;
+  opacity: 0.75;
+}
+
+.logo-wordmark {
+  font-family: 'Space Grotesk', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: inline-block;
+  font-size: 1.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  background: linear-gradient(180deg, #f7fbff 0%, #a7edff 24%, #56b6ff 56%, #194d85 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 0 rgba(26, 77, 131, 0.5),
+    0 3px 0 rgba(20, 60, 102, 0.42),
+    0 4px 0 rgba(14, 43, 75, 0.32),
+    0 10px 18px rgba(0, 0, 0, 0.26),
+    0 0 14px rgba(0, 230, 118, 0.08);
+  transition: transform 0.35s ease, filter 0.35s ease, text-shadow 0.35s ease;
+}
+
+.logo-3d:hover,
+.logo-3d:focus-visible {
+  text-decoration: none;
+}
+
+.logo-3d:hover .logo-wordmark,
+.logo-3d:focus-visible .logo-wordmark {
+  transform: translateY(-1px) rotateX(8deg);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28),
+    0 2px 0 rgba(18, 88, 129, 0.56),
+    0 3px 0 rgba(16, 63, 96, 0.46),
+    0 4px 0 rgba(11, 42, 71, 0.34),
+    0 12px 20px rgba(0, 0, 0, 0.3),
+    0 0 16px rgba(0, 230, 118, 0.12);
+}
+
+/* ======================================
+   Homepage — Full-screen map, no scroll
+   ====================================== */
+.homepage-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.homepage-fullscreen .map-leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+/* Map on homepage */
+.map-leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* ======================================
+   Map Bubble Popup
+   ====================================== */
+
+/* Override Leaflet popup to look like a bubble */
+.bubble-popup .leaflet-popup-content-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.bubble-popup .leaflet-popup-tip {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-left: none;
+}
+
+.bubble-popup .leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+}
+
+.map-bubble {
+  width: 200px;
+  padding: 14px;
+  text-align: center;
+}
+
+.map-bubble-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.map-bubble-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: 3px;
+}
+
+.map-bubble-location {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.map-bubble-hours {
+  font-size: 11px;
+  color: #b0bec5;
+  margin-bottom: 4px;
+}
+
+.map-bubble-access {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.map-bubble-access.access-open {
+  color: #00e676;
+  background: rgba(0, 230, 118, 0.1);
+}
+
+.map-bubble-access.access-restricted {
+  color: #ffb74d;
+  background: rgba(255, 183, 77, 0.1);
+}
+
+.map-bubble-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  margin-top: 0;
+  transition: box-shadow 0.2s;
+}
+
+.map-bubble-btn:hover {
+  box-shadow: 0 2px 12px rgba(30, 136, 229, 0.5);
+}
+
+.map-bubble-distance {
+  color: #4A90FF;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* ── Personal Note Widget ── */
+.note-add-btn {
+  width: 100%;
+  padding: 5px 0;
+  border: 1px dashed rgba(30, 136, 229, 0.3);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.note-add-btn:hover {
+  color: var(--primary-light);
+  border-color: var(--primary-light);
+}
+
+.note-display {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(30, 136, 229, 0.15);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s;
+}
+
+.note-display:hover {
+  border-color: rgba(30, 136, 229, 0.35);
+}
+
+.note-text {
+  display: block;
+  font-size: 11px;
+  color: var(--text-color);
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-edit-hint {
+  display: block;
+  font-size: 9px;
+  color: var(--text-light);
+  opacity: 0;
+  margin-top: 2px;
+  transition: opacity 0.2s;
+}
+
+.note-display:hover .note-edit-hint {
+  opacity: 1;
+}
+
+.note-editor {
+  width: 100%;
+}
+
+.note-textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(30, 136, 229, 0.3);
+  background: rgba(10, 14, 23, 0.7);
+  backdrop-filter: blur(8px);
+  color: var(--text-color);
+  font-size: 11px;
+  font-family: inherit;
+  line-height: 1.4;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.note-textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 8px rgba(30, 136, 229, 0.15);
+}
+
+.note-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  justify-content: flex-end;
+}
+
+.note-actions button {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.note-save {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+}
+
+.note-delete {
+  background: rgba(255, 82, 82, 0.15);
+  color: #ff5252;
+}
+
+.note-cancel {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-light);
+}
+
+.note-actions button:hover {
+  opacity: 0.85;
+}
+
+/* ======================================
+   Map Brand Dock
+   ====================================== */
+/* ── Fan-shaped Dock ── */
+.map-brand-dock {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.map-logo-trigger {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  box-shadow: none;
+  filter: none;
+}
+
+.map-logo-trigger-mark {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent-green), var(--primary-light));
+  box-shadow:
+    0 0 14px rgba(0, 230, 118, 0.32),
+    0 0 22px rgba(30, 136, 229, 0.18);
+  transform: translateY(0.18rem);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.map-logo-trigger-mark.is-open {
+  transform: translateY(0.18rem) scale(1.15);
+  box-shadow:
+    0 0 18px rgba(0, 230, 118, 0.38),
+    0 0 28px rgba(30, 136, 229, 0.24);
+}
+
+/* Fan items container — positioned relative to the logo */
+.map-fan-items {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Each fan button — positioned along an arc below the logo.
+   3 buttons spread across 120° arc (from -60° to +60°).
+   --fan-index: 0 = left, 1 = center, 2 = right
+   AI was used to help calculate the CSS custom-property-driven arc positioning */
+.map-fan-btn {
+  --fan-count: 3;
+  --fan-spread: 150deg;
+  --fan-radius: 68px;
+  --fan-start: calc(-1 * var(--fan-spread) / 2);
+  --fan-step: calc(var(--fan-spread) / (var(--fan-count) - 1));
+  --fan-angle: calc(var(--fan-start) + var(--fan-index) * var(--fan-step));
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 72px;
+  height: 72px;
+  margin-left: -36px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  pointer-events: auto;
+
+  /* Position on arc: rotate around origin, push out by radius, counter-rotate to keep upright */
+  transform:
+    rotate(var(--fan-angle))
+    translateY(var(--fan-radius))
+    rotate(calc(-1 * var(--fan-angle)))
+    scale(0);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  transition-delay: calc(var(--fan-index) * 0.06s);
+}
+
+.map-brand-dock.is-open .map-fan-btn {
+  transform:
+    rotate(var(--fan-angle))
+    translateY(var(--fan-radius))
+    rotate(calc(-1 * var(--fan-angle)))
+    scale(1);
+  opacity: 1;
+}
+
+.map-fan-btn:hover {
+  color: #ffffff;
+  transform:
+    rotate(var(--fan-angle))
+    translateY(var(--fan-radius))
+    rotate(calc(-1 * var(--fan-angle)))
+    scale(1.12);
+}
+
+.map-fan-btn:hover .map-fan-icon {
+  filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.5));
+}
+
+.map-fan-icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+  transition: filter 0.22s ease;
+}
+
+.map-fan-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.map-brand-lock.is-primed {
+  color: #ffffff;
+}
+
+.map-brand-lock.is-primed .map-fan-icon {
+  filter: drop-shadow(0 0 12px rgba(0, 230, 118, 0.6));
+}
+
+.map-brand-status {
+  position: absolute;
+  top: calc(100% + 90px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.map-brand-status-info {
+  color: #9dd1ff;
+  background: rgba(66, 165, 245, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.map-brand-status-error {
+  color: #ff9b9b;
+  background: rgba(255, 82, 82, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+/* ======================================
+   Restroom Marker — deep blue dot + green glow hover
+   ====================================== */
+.restroom-marker {
+  background: none !important;
+  border: none !important;
+}
+
+.restroom-dot {
+  width: 12px;
+  height: 12px;
+  background: #1a3a6b;
+  border: 1.5px solid rgba(74, 144, 255, 0.4);
+  border-radius: 50%;
+  position: relative;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 4px rgba(26, 58, 107, 0.5);
+}
+
+.restroom-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.restroom-marker:hover .restroom-dot {
+  background: #00c853;
+  border-color: rgba(0, 200, 83, 0.6);
+  box-shadow:
+    0 0 6px rgba(0, 200, 83, 0.5),
+    0 0 16px rgba(0, 200, 83, 0.25);
+  animation: marker-pulse 2s ease-in-out infinite;
+}
+
+.restroom-marker:hover .restroom-glow {
+  opacity: 1;
+  animation: glow-ripple 2s ease-in-out infinite;
+}
+
+@keyframes marker-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 6px rgba(0, 200, 83, 0.5),
+      0 0 16px rgba(0, 200, 83, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 10px rgba(0, 200, 83, 0.6),
+      0 0 24px rgba(0, 200, 83, 0.35);
+  }
+}
+
+@keyframes glow-ripple {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 767px) {
+  .logo-wordmark {
+    font-size: 1.34rem;
+    letter-spacing: 0.03em;
+  }
+
+  .map-brand-dock {
+    top: 14px;
+  }
+
+  .map-fan-btn {
+    --fan-radius: 58px;
+    width: 64px;
+    height: 64px;
+    margin-left: -32px;
+  }
+
+  .map-fan-icon {
+    font-size: 1.2rem;
+  }
+
+  .map-fan-label {
+    font-size: 0.62rem;
+  }
+}

@@ -1,0 +1,78 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background: #fff;
+}
+
+/* ── Onboarding (frame) ── */
+.onboarding-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #999;
+  cursor: pointer;
+}
+
+.onboarding-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.onboarding-hint {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #999;
+}
+
+/* ── Homepage / Map (frame) ── */
+.homepage-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0; left: 0;
+}
+
+.map-leaflet-container {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(100%);
+}
+
+/* ── Dock (frame placeholder) ── */
+.dock-frame {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.dock-logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.dock-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.dock-btn {
+  font-size: 0.8rem;
+  color: #666;
+  border: 1px dashed #999;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #fff;
+}
